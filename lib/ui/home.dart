@@ -858,8 +858,7 @@ class _SelectTypeState extends State<SelectType> with WidgetsBindingObserver {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   TextButton(
-                                    onPressed: () =>
-                                        Navigator.of(context).pop(),
+                                    onPressed: () => Navigator.of(context).pop(),
                                     style: TextButton.styleFrom(
                                       padding: const EdgeInsets.symmetric(
                                         horizontal: 20,
@@ -881,9 +880,7 @@ class _SelectTypeState extends State<SelectType> with WidgetsBindingObserver {
                                   ElevatedButton(
                                     onPressed: () async {
                                       _createFileKey.currentState!.validate();
-                                      if (createFileController
-                                          .text
-                                          .isNotEmpty) {
+                                      if (createFileController.text.isNotEmpty) {
                                         final file = await createFile(
                                           createFileController.text,
                                           filesDir,
@@ -1581,7 +1578,7 @@ class _SelectTypeState extends State<SelectType> with WidgetsBindingObserver {
                 ),
                 const SizedBox(height: 30),
                 Padding(
-                  padding: const EdgeInsets.only(left: 30),
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -1614,134 +1611,131 @@ class _SelectTypeState extends State<SelectType> with WidgetsBindingObserver {
                                   fontSize: 18,
                                 ),
                               )
-                            : SizedBox(
-                                width: 350,
-                                child: Center(
-                                  child: ListView.builder(
-                                    shrinkWrap: true,
-                                    itemCount: recentData.length,
-                                    itemBuilder: (context, index) {
-                                      final currentEntry = recentData[index];
-                                      final String entryType = currentEntry['type'] as String? ?? 'file';
-                                      final String entryPath = currentEntry['path'] as String? ?? '';
-                                      final String rootDir = currentEntry['rootDir'] as String?
-                                        ?? (entryType == 'project' ? entryPath : path.dirname(entryPath));
-                                      final bool isProject = entryType == 'project';
-                                      final bool exists = isProject
-                                        ? Directory(entryPath).existsSync()
-                                        : File(entryPath).existsSync();
-                                      return Card(
-                                        child: ListTile(
-                                          textColor: appThemestate.appTheme.selectScreenCardTextColor,
-                                          shape: const RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(15),
-                                            ),
-                                          ),
-                                          onTap: () {
-                                            if (!exists) {
-                                              ScaffoldMessenger.of(
-                                                context,
-                                              ).showSnackBar(
-                                                SnackBar(
-                                                  content: Text(
-                                                    isProject
-                                                      ? l10n.projectNotFound
-                                                      : l10n.fileNotFound,
-                                                  ),
-                                                ),
-                                              );
-                                              return;
-                                            }
-                                  
-                                            if (isProject) {
-                                              Navigator.of(context).push(
-                                                PageRouteBuilder(
-                                                  pageBuilder:(context, animation, secondaryAnimation) => EditorPage(
-                                                    rootDir: entryPath,
-                                                    isCloned: true,
-                                                    isProject: true,
-                                                    languageDetails: null,
-                                                  ),
-                                                  transitionsBuilder:(context, animation, secondaryAnimation, child,) {
-                                                    return SizeTransition(
-                                                      sizeFactor:
-                                                          animation,
-                                                      child: child,
-                                                    );
-                                                  },
-                                                ),
-                                              );
-                                              return;
-                                            }
-                                  
-                                            Navigator.of(context).push(
-                                              PageRouteBuilder(
-                                                pageBuilder: (context, animation, secondaryAnimation) => EditorPage(
-                                                  file: File(entryPath),
-                                                  rootDir: rootDir,
-                                                  languageDetails: (() {
-                                                    final matchingLang = languages.where(
-                                                      (lang) => lang.extension.contains(
-                                                        path.extension(entryPath).toLowerCase().replaceFirst(".",""))).toList();
-                                                    if (matchingLang.isNotEmpty) return matchingLang[0];
-                                                    return Language(
-                                                      name: "Unknown",
-                                                      extension: ["null"],
-                                                      details: "Unknown language",
-                                                      language: unknown,
-                                                      helloWorld: "Unknown type of file",
-                                                      icon: null
-                                                    );
-                                                  })(),
-                                                  isProject: false,
-                                                ),
-                                                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                                  return SizeTransition(
-                                                    sizeFactor: animation,
-                                                    child: child,
-                                                  );
-                                                },
-                                              ),
-                                            );
-                                          },
-                                          title: Text(
-                                            exists
-                                              ? path.basename(entryPath)
-                                              : "${path.basename(entryPath)} - ${isProject ? l10n.projectNotFound : l10n.fileNotFound}",
-                                            style: const TextStyle(
-                                              fontSize: 17,
-                                            ),
-                                          ),
-                                          subtitle: Text(
-                                            rootDir,
-                                            style: TextStyle(
-                                              color:
-                                                appThemestate.appTheme.isDark
-                                                ? Colors.grey
-                                                : Colors.grey[600],
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                          leading: (() {
-                                            if (isProject) {
-                                              return const Icon(
-                                                Icons.folder_open_rounded,
-                                                color: Color(0xff5090c8),
-                                              );
-                                            }
-                                            final matchingLang = languages.where(
-                                              (lang) =>lang.extension.contains(
-                                                path.extension(entryPath,).toLowerCase().replaceFirst(".",""))).toList();
-                                            if (matchingLang.isNotEmpty) return matchingLang[0].icon;
-                                            return langtxt.icon;
-                                          })(),
+                            : Center(
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: recentData.length,
+                                itemBuilder: (context, index) {
+                                  final currentEntry = recentData[index];
+                                  final String entryType = currentEntry['type'] as String? ?? 'file';
+                                  final String entryPath = currentEntry['path'] as String? ?? '';
+                                  final String rootDir = currentEntry['rootDir'] as String?
+                                    ?? (entryType == 'project' ? entryPath : path.dirname(entryPath));
+                                  final bool isProject = entryType == 'project';
+                                  final bool exists = isProject
+                                    ? Directory(entryPath).existsSync()
+                                    : File(entryPath).existsSync();
+                                  return Card(
+                                    child: ListTile(
+                                      textColor: appThemestate.appTheme.selectScreenCardTextColor,
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(15),
                                         ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                              );
+                                      ),
+                                      onTap: () {
+                                        if (!exists) {
+                                          ScaffoldMessenger.of(
+                                            context,
+                                          ).showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                isProject
+                                                  ? l10n.projectNotFound
+                                                  : l10n.fileNotFound,
+                                              ),
+                                            ),
+                                          );
+                                          return;
+                                        }
+                              
+                                        if (isProject) {
+                                          Navigator.of(context).push(
+                                            PageRouteBuilder(
+                                              pageBuilder:(context, animation, secondaryAnimation) => EditorPage(
+                                                rootDir: entryPath,
+                                                isCloned: true,
+                                                isProject: true,
+                                                languageDetails: null,
+                                              ),
+                                              transitionsBuilder:(context, animation, secondaryAnimation, child,) {
+                                                return SizeTransition(
+                                                  sizeFactor:
+                                                      animation,
+                                                  child: child,
+                                                );
+                                              },
+                                            ),
+                                          );
+                                          return;
+                                        }
+                              
+                                        Navigator.of(context).push(
+                                          PageRouteBuilder(
+                                            pageBuilder: (context, animation, secondaryAnimation) => EditorPage(
+                                              file: File(entryPath),
+                                              rootDir: rootDir,
+                                              languageDetails: (() {
+                                                final matchingLang = languages.where(
+                                                  (lang) => lang.extension.contains(
+                                                    path.extension(entryPath).toLowerCase().replaceFirst(".",""))).toList();
+                                                if (matchingLang.isNotEmpty) return matchingLang[0];
+                                                return Language(
+                                                  name: "Unknown",
+                                                  extension: ["null"],
+                                                  details: "Unknown language",
+                                                  language: unknown,
+                                                  helloWorld: "Unknown type of file",
+                                                  icon: null
+                                                );
+                                              })(),
+                                              isProject: false,
+                                            ),
+                                            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                              return SizeTransition(
+                                                sizeFactor: animation,
+                                                child: child,
+                                              );
+                                            },
+                                          ),
+                                        );
+                                      },
+                                      title: Text(
+                                        exists
+                                          ? path.basename(entryPath)
+                                          : "${path.basename(entryPath)} - ${isProject ? l10n.projectNotFound : l10n.fileNotFound}",
+                                        style: const TextStyle(
+                                          fontSize: 17,
+                                        ),
+                                      ),
+                                      subtitle: Text(
+                                        rootDir,
+                                        style: TextStyle(
+                                          color:
+                                            appThemestate.appTheme.isDark
+                                            ? Colors.grey
+                                            : Colors.grey[600],
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      leading: (() {
+                                        if (isProject) {
+                                          return const Icon(
+                                            Icons.folder_open_rounded,
+                                            color: Color(0xff5090c8),
+                                          );
+                                        }
+                                        final matchingLang = languages.where(
+                                          (lang) =>lang.extension.contains(
+                                            path.extension(entryPath,).toLowerCase().replaceFirst(".",""))).toList();
+                                        if (matchingLang.isNotEmpty) return matchingLang[0].icon;
+                                        return langtxt.icon;
+                                      })(),
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
                         },
                       ),
                     ],

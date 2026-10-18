@@ -1,26 +1,43 @@
+[English](./README.md) | [简体中文](./README-CN.md) | [Español](./README-ES.md)
+
 # Roxum IDE
 
-Roxum IDE 是一款专为 Android 打造、基于 Flutter 开发的移动优先代码编辑器和迷你 IDE。
-它将代码编辑、终端工作流、Git/GitHub 工具、AI 辅助、运行时下载以及深度自定义功能整合到一个应用中。
+Roxum IDE 是一款专为移动设备设计的 Android 代码编辑器和轻量级 IDE，使用 Flutter 构建。
 
-#### Roxum 使用强大的 [code_forge](https://github.com/heckmon/code_forge) 软件包作为编辑器引擎。
+它将代码编辑、终端工作流、Git/GitHub 工具、AI 辅助、运行时环境下载以及深度自定义功能整合到一个应用中。
+
+#### Roxum 使用功能强大的 [code_forge](https://github.com/heckmon/code_forge) 软件包作为编辑器引擎。
 
 <a href="https://play.google.com/store/apps/details?id=com.roxum">
   <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="60">
 </a>
 
-## 版本 2 新内容：
+## 功能列表
 
-* **新增 SSH 支持，可连接远程系统。**
-* **新增内置 Termux 支持，可将 Termux 作为后端使用。**
-* **支持下载并加载本地 GGUF LLM 模型，用于离线聊天和代码补全（参考 [#9](https://github.com/heckmon/roxum-ide/issues/9) 和 [#16](https://github.com/heckmon/roxum-ide/issues/16)）。**
-* **根据 [#11](https://github.com/heckmon/roxum-ide/issues/11) 的请求，新增主题搜索栏。**
-* **将 [编辑器](https://github.com/heckmon/code_forge) 后端迁移至 Rust。**
-* **将 JDT-LS 替换为 kmp-lsp，为 Java、Kotlin 和 Swift 提供 LSP 支持。**
-* **修复了 [#15](https://github.com/heckmon/roxum-ide/issues/15) 和 [#14](https://github.com/heckmon/roxum-ide/issues/14)。如果问题仍然存在，可以使用 Termux。**
-* **[#10](https://github.com/heckmon/roxum-ide/issues/10) 和 [#18](https://github.com/heckmon/roxum-ide/issues/18) 可通过新的 Termux 后端解决。**
+- **完全免费且开源。**
+- **内置 Termux 支持，可使用 Termux 作为后端。**
+- **下载或加载本地 GGUF 格式的大语言模型（LLM），实现离线聊天和代码补全。**
+- **为主流编程语言提供离线编译器和扩展。**
+- **内置 245 款主题，并支持创建自定义主题。**
+- **内置终端。**
+- **基于 Rust 构建的编辑器后端，使用 rope 和 sum tree 数据结构，设计理念类似于 Zed 编辑器。**
+- **AI 代码补全。**
+- **支持 LSP（代码提示、自动补全、错误高亮、悬停信息等）。**
+- **集成 Git 和 GitHub。**
+- **支持 SSH，可连接远程系统。**
+- **支持集成外部 AI 服务提供商，实现基于智能代理的代码编辑。**
 
-### 展示图集
+## 2.8.0 版本更新
+
+- 修复：[ #56](https://github.com/heckmon/roxum-ide/issues/56)
+- 修复：[ #53](https://github.com/heckmon/roxum-ide/issues/53)
+- 修复：[ #52](https://github.com/heckmon/roxum-ide/issues/52)
+- 修复：Zig 编译器错误。
+- 改进：优化编辑器后端。
+
+---
+
+### 应用截图
 
 <table>
   <tr>
@@ -29,59 +46,75 @@ Roxum IDE 是一款专为 Android 打造、基于 Flutter 开发的移动优先�
     <td><img src="https://raw.githubusercontent.com/heckmon/android-arm64-shared-libraries/refs/heads/main/scrnshots/ag_diff.jpg" width="100%"></td>
     <td><img src="https://raw.githubusercontent.com/heckmon/android-arm64-shared-libraries/refs/heads/main/scrnshots/rt-roxum.jpg" width="100%"></td>
   </tr>
+  <tr>
+    <td><img src="https://lh3.googleusercontent.com/o8_GNH3SBQnbnrJWduWE9xbW-RF8NBO3iphBx1mEc_gVYbSkyAGZyy5zEcMTGupt_1oCQipOpZMwbjlhJgbjyEs" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/heckmon/android-arm64-shared-libraries/refs/heads/main/scrnshots/ext.jpg" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/heckmon/android-arm64-shared-libraries/refs/heads/main/scrnshots/diag.jpg" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/heckmon/android-arm64-shared-libraries/refs/heads/main/scrnshots/accnt.jpg" width="100%"></td>
+  </tr>
+  <tr>
+    <td><img src="https://raw.githubusercontent.com/heckmon/android-arm64-shared-libraries/refs/heads/main/scrnshots/explorer.jpg" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/heckmon/android-arm64-shared-libraries/refs/heads/main/scrnshots/lsp.jpg" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/heckmon/android-arm64-shared-libraries/refs/heads/main/scrnshots/ai_cmpl.jpg" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/heckmon/android-arm64-shared-libraries/refs/heads/main/scrnshots/themes.jpg" width="100%"></td>
+  </tr>
+  <tr>
+    <td><img src="https://raw.githubusercontent.com/heckmon/android-arm64-shared-libraries/refs/heads/main/scrnshots/git_diff.jpg" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/heckmon/android-arm64-shared-libraries/refs/heads/main/scrnshots/gguf.jpg" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/heckmon/android-arm64-shared-libraries/refs/heads/main/scrnshots/termenu.jpg" width="100%"></td>
+    <td><img src="https://raw.githubusercontent.com/heckmon/android-arm64-shared-libraries/refs/heads/main/scrnshots/term.jpg" width="100%"></td>
+  </tr>
 </table>
 
 ---
 
-<br>
+# 如果你所在的国家或地区无法访问 Google Play 商店
 
-# 如果 Play Store 在你的国家无法访问：
-
-## 从 [releases](https://github.com/heckmon/roxum-ide/releases) 下载完整 APK
+## 从 [Releases](https://github.com/heckmon/roxum-ide/releases) 下载完整 APK
 
 #### 或者
 
-## 从源码构建
+## 从源代码构建
 
-本部分主要面向中国等无法访问 Play Store 的用户。否则，建议直接从 Play Store 下载上方提到的完整功能 APK。<br>
+本节主要面向中国等无法访问 Google Play 商店的国家或地区的用户。其他用户建议直接从上文提到的 Google Play 商店下载功能完整的 APK。
 
-克隆此仓库后：
+克隆此仓库，然后按照以下步骤操作：
 
-请确保系统中已安装 [git-lfs](https://git-lfs.com/)，并且可通过 `path` 访问。不要跳过此步骤，因为编译器和解释器存储在 GitHub Large File Storage 中。
+确保系统已安装 [git-lfs](https://git-lfs.com/)，并且可以通过 `PATH` 环境变量访问该工具。**不要跳过此步骤**，因为编译器和解释器存储在 GitHub Large File Storage（Git LFS）中。
 
-#### 1) 将应用构建为 `aab` 包。
+#### 1）将应用构建为 `aab` 软件包
 
 > [!NOTE]
 >
-> 为了包含所有编译器、解释器和扩展，我们将其构建为独立的 `aab` 文件，因此体积比从 Play Store 下载的 APK 更大。Play Store 版本较小，因为外部依赖会在用户需要特定编译器/解释器/扩展时按需下载。
+> 为了在构建中包含所有编译器、解释器和扩展，我们将应用构建为独立的 `aab` 文件。该文件比从 Google Play 商店下载的 APK 更大。Play 商店版本体积更小，因为这些外部依赖项会在用户请求使用相应的编译器、解释器或扩展时按需下载。
+
+开始之前，请安装必要的 Flutter 和 Android 开发工具。
 
 ```bash
 cd android && ./gradlew :app:bundleRelease
 ```
 
-生成文件位置：
+生成的文件位于：
 
 `build/app/outputs/bundle/release/app-release.aab`
 
-#### 2) 从 AAB 创建 APK
+#### 2）从 AAB 创建 APK
 
-要在设备上安装 AAB，需要先转换为 APK。请先从官方仓库下载最新 bundletool：
+要在设备上安装 AAB 文件，需要先将其转换为 APK。请从官方仓库下载最新版本的 bundletool：
 
 https://github.com/google/bundletool/releases
 
-然后构建 APK：
+然后执行以下命令生成 APK：
 
 ```bash
 java -jar path/to/bundletool.jar build-apks --bundle=your_app/build/app/outputs/bundle/release/app-release.aab --output=output.apks --mode=universal
 ```
 
-会在当前目录生成：
+执行后，当前目录下将生成名为 `output.apks` 的文件。
 
-`output.apks`
+#### 3）安装 APKS 文件
 
-#### 3) 安装 APK 文件
-
-请确保已通过 `adb` 连接模拟器或实体设备。
+确保已通过 `adb` 连接 Android 模拟器或实体设备。
 
 ```bash
 java -jar /path/to/bundletool.jar install-apks --apks=output.apks
@@ -91,4 +124,4 @@ java -jar /path/to/bundletool.jar install-apks --apks=output.apks
 
 特别感谢 ♥️
 
-* [@MaximoMachado](https://github.com/MaximoMachado) — 帮助资助了 Play Store 发布。
+- [@MaximoMachado](https://github.com/MaximoMachado)：为应用在 Google Play 商店的发布提供了资金支持。

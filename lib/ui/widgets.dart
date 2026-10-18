@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:code_forge/code_forge.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_json/flutter_json.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
@@ -20,6 +19,7 @@ import 'package:re_highlight/re_highlight.dart' show Mode;
 import 'package:re_highlight/styles/atom-one-dark.dart';
 import 'package:roxum/utils/agentic_tools.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:zikzak_inappwebview/zikzak_inappwebview.dart';
 import '../bloc/repo_bloc/repo_bloc.dart';
 import '../bloc/ui_bloc/ui_bloc.dart';
 import '../terminal/terminal.dart';
@@ -383,7 +383,7 @@ class _CodeEditorState extends State<CodeEditor> with AutomaticKeepAliveClientMi
     }
     try {
       if (controller.text.isEmpty && widget.filePath.existsSync()) {
-        controller.openedFile = widget.filePath.path;
+        controller.openFile = widget.filePath.path;
         controller.notifyListeners();
       }
     } catch (_) {

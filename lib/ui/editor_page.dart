@@ -2953,9 +2953,11 @@ set -e
 
 wrapper="$tempDir/.roxum_zig_wrapper.zig"
 user_file="$tempDir/tempCode.zig"
+link_dir="$runtimesDir/clang/sysroot/.roxum_zig_android_libs"
 
 cleanup() {
     rm -f "\$wrapper" "\$user_file" "$soPath"
+    rm -rf "\$link_dir"
 }
 
 trap cleanup EXIT
@@ -2972,12 +2974,20 @@ EOF
 
 cd "$tempDir"
 
+mkdir -p "\$link_dir"
+ln -sf /system/lib64/libc.so "\$link_dir/liblibc.so"
+ln -sf /system/lib64/libm.so "\$link_dir/liblibm.so"
+ln -sf /system/lib64/libdl.so "\$link_dir/liblibdl.so"
+
 zig build-lib "\$wrapper" \\
     -dynamic \\
     -fPIC \\
     -target aarch64-linux-android \\
     --sysroot "$runtimesDir/clang/sysroot" \\
-    -lc \\
+    -L/.roxum_zig_android_libs \\
+    -llibc \\
+    -llibm \\
+    -llibdl \\
     -femit-bin="$soPath"
 
 rustloader "$soPath"

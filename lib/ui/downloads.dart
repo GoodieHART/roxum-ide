@@ -396,7 +396,7 @@ class _DownloadManagerState extends State<DownloadManager> {
     }
 
     if (!isExtension &&
-        (normalizedParentName == 'rust' || normalizedParentName == 'go') &&
+        (normalizedParentName == 'rust' || normalizedParentName == 'go' || normalizedParentName == "zig") &&
         !_isClangRuntimeInstalled()) {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

@@ -22,6 +22,7 @@ class ProjectScreen extends StatefulWidget {
 
 class _ProjectScreenState extends State<ProjectScreen> {
   final TextEditingController _projectNameController = TextEditingController();
+  final _projectCreationKey = GlobalKey<FormState>();
   bool _yourProjectsExpanded = false;
   bool _templatesExpanded = false, _generating = true;
   Future<List<Directory>>? _existingProjectsFuture;
@@ -584,27 +585,36 @@ class _ProjectScreenState extends State<ProjectScreen> {
                                           ],
                                         ),
                                         const SizedBox(height: 24),
-                                        TextFormField(
-                                          controller: _projectNameController,
-                                          style: TextStyle(
-                                            color: appTheme.selectScreenCardTextColor,
-                                          ),
-                                          cursorColor: const Color(0xff5090c8),
-                                          decoration: InputDecoration(
-                                            hintStyle: TextStyle(color: Colors.grey[500]),
-                                            hintText: "Project name",
-                                            filled: true,
-                                            fillColor: appTheme.isDark
-                                              ? Colors.white.withValues(alpha: 0.05)
-                                              : Colors.black.withValues(alpha: 0.05),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(15),
-                                              borderSide: const BorderSide(color: Color(0xff5090c8), width: 2),
+                                        Form(
+                                          key: _projectCreationKey,
+                                          child: TextFormField(
+                                            controller: _projectNameController,
+                                            validator: (value) {
+                                              if (value == null || value.isEmpty) {
+                                                return l10n.validFilenameRequired;
+                                              }
+                                              return null;
+                                            },
+                                            style: TextStyle(
+                                              color: appTheme.selectScreenCardTextColor,
                                             ),
-                                            border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(15),
+                                            cursorColor: const Color(0xff5090c8),
+                                            decoration: InputDecoration(
+                                              hintStyle: TextStyle(color: Colors.grey[500]),
+                                              hintText: "Project name",
+                                              filled: true,
+                                              fillColor: appTheme.isDark
+                                                ? Colors.white.withValues(alpha: 0.05)
+                                                : Colors.black.withValues(alpha: 0.05),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(15),
+                                                borderSide: const BorderSide(color: Color(0xff5090c8), width: 2),
+                                              ),
+                                              border: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(15),
+                                              ),
+                                              contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                                             ),
-                                            contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                                           ),
                                         ),
                                         const SizedBox(height: 24),
@@ -630,6 +640,7 @@ class _ProjectScreenState extends State<ProjectScreen> {
                                             const SizedBox(width: 12),
                                             ElevatedButton(
                                               onPressed: () async {
+                                                if(!_projectCreationKey.currentState!.validate()) return;
                                                 if(item is PlainTemplates){
                                                   ScaffoldMessenger.of(context).showSnackBar(
                                                     SnackBar(

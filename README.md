@@ -29,13 +29,12 @@ It combines editing, terminal workflows, Git/GitHub tooling, AI assistance, runt
 - **SSH support for connecting with remote systems.**  
 - **Intergrate with external AI providers for agentic editing.**
 
-## What's new in 2.7.0:
-  - FIX: [#50](https://github.com/heckmon/roxum-ide/issues/50)
-  - FIX: [#49](https://github.com/heckmon/roxum-ide/issues/49)
-  - FIX: Run button opens terminal.
-  - FIX: Cargo TLS certificate error.
-  - FEATURE: Added ZIG compiler.
-  - FEATURE: Added ZLS LSP server.
+## What's new in 2.8.0:
+  - FIX: [#56](https://github.com/heckmon/roxum-ide/issues/56)
+  - FIX: [#53](https://github.com/heckmon/roxum-ide/issues/53)
+  - FIX: [#52](https://github.com/heckmon/roxum-ide/issues/52)
+  - FIX: Zig compiler error.
+  - ENHANCEMENT: Optimized editor backend.
 
 ---
 ### Gallery

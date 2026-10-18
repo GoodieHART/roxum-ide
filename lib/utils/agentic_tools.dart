@@ -6,7 +6,6 @@ import 'package:code_forge/code_forge.dart';
 import 'package:diff_match_patch/diff_match_patch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:html/parser.dart' as html;
 import 'package:http/http.dart' as http;
@@ -15,6 +14,7 @@ import 'package:roxum/utils/agentic_tool_catalog.dart';
 import 'package:roxum/bloc/ui_bloc/ui_bloc.dart';
 import 'package:roxum/utils/constants.dart';
 import 'package:roxum/utils/functions.dart';
+import 'package:zikzak_inappwebview/zikzak_inappwebview.dart';
 
 class AgenticTools {
   final BuildContext context;

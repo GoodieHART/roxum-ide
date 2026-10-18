@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:path/path.dart' as path;
+import 'package:zikzak_inappwebview/zikzak_inappwebview.dart';
 import '../bloc/ui_bloc/ui_bloc.dart';
 
 class WebViewScreen extends StatefulWidget {

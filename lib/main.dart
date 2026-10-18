@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:code_forge/code_forge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +13,6 @@ import 'terminal/terminal.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await RustLib.init();
   await migrateSharedStorageRoots();
   final recent = await getRecent();
   final appTheme = await getAppTheme();
