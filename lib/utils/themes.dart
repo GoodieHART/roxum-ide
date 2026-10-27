@@ -11,12 +11,7 @@ final fonts = [
   'monospace',
   'firaCode',
   'cascadia',
-  'hack',
-  'dejaVuSansMono',
-  'inconsolata',
   'jetBrainsMono',
-  'proggy',
-  'sourceCodePro'
   ];
 
 const String defaultTerminalThemeId = 'classic-green';

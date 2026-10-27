@@ -419,9 +419,7 @@ final langjava = Language(
   language: builtinAllLanguages['java'],
   helloWorld:'public class tempCode{\n  public static void main(String[] args){ \n    System.out.println("Hello, World!");\n  }\n}',
   icon: SvgPicture.asset('assets/material_icons/java.svg', height: 35,width: 35),
-  command: 'javac',
   type: 'compiled',
-  lspExecutable: "/data/data/com.roxum/bin/kmp-lsp",
 );
 final langc = Language(
   name: 'C',
@@ -463,7 +461,6 @@ final langdart = Language(
   details:'Optimized for building fast, multi-platform apps, often with Flutter.',
   language: builtinAllLanguages['dart'],
   helloWorld: 'void main(){\n print("Hello, World!");\n}',
-  command: 'dart',
   type: 'compiled(no binary)',
   icon: SvgPicture.asset('assets/material_icons/dart.svg',height: 35,width: 35),
   customCodeSnippet: [
@@ -479,7 +476,6 @@ final langdart = Language(
       cursorLocations: {18, 31},
     ),
   ],
-  lspExecutable: '$binDir/dart'
 );
 
 final langhtml = Language(
@@ -561,10 +557,8 @@ final langswift = Language(
   details: 'Apple\'s language for iOS and macOS apps.',
   language: builtinAllLanguages['swift'],
   helloWorld: 'print("Hello, World!")',
-  command: 'swift',
   icon: SvgPicture.asset('assets/material_icons/swift.svg',height: 35,width: 35),
   type: 'compiled',
-  lspExecutable: "/data/data/com.roxum/bin/kmp-lsp",
 );
 final langkotlin = Language(
   name: 'Kotlin',
@@ -572,10 +566,8 @@ final langkotlin = Language(
   details: 'Modern JVM language, popular for Android development.',
   language: builtinAllLanguages['kotlin'],
   helloWorld: 'fun main(){\n println("Hello, World!")\n}',
-  command: 'kotlinc',
   icon: SvgPicture.asset('assets/material_icons/kotlin.svg',height: 35,width: 35),
   type: 'compiled',
-  lspExecutable: "/data/data/com.roxum/bin/kmp-lsp",
 );
 final langcsharp = Language(
   name: 'C#',
@@ -593,10 +585,8 @@ final langrust = Language(
   details: 'Focused on performance, safety, and concurrency.',
   language: builtinAllLanguages['rust'],
   helloWorld: 'fn main(){\n println!("Hello, World!");\n}',
-  command: 'rustc',
   icon: SvgPicture.asset('assets/material_icons/rust.svg',height: 35,width: 35),
   type: 'compiled',
-  lspExecutable: '/data/data/com.roxum/bin/rust-analyzer',
 );
 final langgo = Language(
   name: 'Go',
@@ -604,10 +594,8 @@ final langgo = Language(
   details:'Known for simplicity and performance, ideal for concurrent programming.',
   language: builtinAllLanguages['go'],
   helloWorld:'package main\n\nimport "fmt"\n\nfunc main(){\n fmt.Println("Hello, World!")\n}',
-  command: 'go run',
   icon: SvgPicture.asset('assets/material_icons/go_gopher.svg',height: 35,width: 35),
   type: 'compiled(no binary)',
-  lspExecutable: '/data/data/com.roxum/bin/gopls',
 );
 final langruby = Language(
   name: 'Ruby',
@@ -615,7 +603,6 @@ final langruby = Language(
   details: 'Dynamic language, often used with the Rails framework.',
   language: builtinAllLanguages['ruby'],
   helloWorld: 'puts "Hello, World!"',
-  command: 'ruby',
   icon: SvgPicture.asset('assets/material_icons/ruby.svg',height: 35,width: 35),
   type: 'compiled(no binary)'
 );
@@ -670,11 +657,9 @@ final langlua = Language(
   extension: ['lua'],
   details:'A lightweight scripting language often used in game development.',
   language: builtinAllLanguages['lua'],
-  command: 'lua',
   icon: SvgPicture.asset('assets/material_icons/lua.svg',height: 35,width: 35),
   helloWorld: 'print("Hello, World!")',
   type: 'compiled(no binary)',
-  lspExecutable: '/data/data/com.roxum/bin/emmyluals',
 );
 final langbash = Language(
   name: 'Bash',
@@ -910,7 +895,6 @@ final langZig = Language(
   language: langzig,
   helloWorld: 'const std = @import("std");\npub fn main() void {\n  std.debug.print("Hello, World!", .{});\n}',
   icon: SvgPicture.asset('assets/material_icons/zig.svg',height: 35,width: 35),
-  lspExecutable: '/data/data/com.roxum/bin/zls',
 );
 final langOCaml = Language(
   name: 'OCaml',

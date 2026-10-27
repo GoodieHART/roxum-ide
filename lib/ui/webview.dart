@@ -211,7 +211,6 @@ class _WebViewScreenState extends State<WebViewScreen> {
               },
               onLoadStart: (controller, url) async {
 
-                await controller.injectJavascriptFileFromAsset(assetFilePath: "assets/webview/eruda.js");
                 await controller.evaluateJavascript(source: """
                         window.flutter_inappwebview.callHandler = window.flutter_inappwebview.callHandler || function() {};
                         window.setViewport = function(isMobile) {
@@ -237,7 +236,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
                 await controller.evaluateJavascript(source: """
                       window.setEruda = function(val) {
                         if (val) {
-                            eruda.init();
+                            if (window.eruda) eruda.init();
                         } else {
                           if (window.eruda) {
                             eruda.destroy();

@@ -55,65 +55,11 @@ class _DownloadManagerState extends State<DownloadManager> {
       weight: 80.0,
       displayName: 'Python',
     ),
-    'java': _PfdRuntimeConfig(
-      moduleName: 'java_feature',
-      assetArchiveName: 'java-21-openjdk.zip',
-      weight: 80.0,
-      displayName: 'Java',
-    ),
-    'java-21-openjdk': _PfdRuntimeConfig(
-      moduleName: 'java_feature',
-      assetArchiveName: 'java-21-openjdk.zip',
-      weight: 80.0,
-      displayName: 'Java',
-    ),
-    'kotlin': _PfdRuntimeConfig(
-      moduleName: 'kotlin_feature',
-      assetArchiveName: 'kotlin.zip',
-      weight: 80.0,
-      displayName: 'Kotlin',
-    ),
     'clang': _PfdRuntimeConfig(
       moduleName: 'clang_feature',
       assetArchiveName: 'clang.zip',
       weight: 80.0,
       displayName: 'Clang',
-    ),
-    'dart': _PfdRuntimeConfig(
-      moduleName: 'dart_feature',
-      assetArchiveName: 'dart.zip',
-      weight: 80.0,
-      displayName: 'Dart',
-    ),
-    'rust': _PfdRuntimeConfig(
-      moduleName: 'rust_feature',
-      assetArchiveName: 'rust.zip',
-      weight: 80.0,
-      displayName: 'Rust',
-    ),
-    'zig': _PfdRuntimeConfig(
-      moduleName: 'zig_feature',
-      assetArchiveName: 'zig.zip',
-      weight: 80.0,
-      displayName: 'Zig',
-    ),
-    'go': _PfdRuntimeConfig(
-      moduleName: 'go_feature',
-      assetArchiveName: 'go.zip',
-      weight: 80.0,
-      displayName: 'Go',
-    ),
-    'ruby': _PfdRuntimeConfig(
-      moduleName: 'ruby_feature',
-      assetArchiveName: 'ruby.zip',
-      weight: 80.0,
-      displayName: 'Ruby',
-    ),
-    'lua': _PfdRuntimeConfig(
-      moduleName: 'lua_feature',
-      assetArchiveName: 'lua.zip',
-      weight: 80.0,
-      displayName: 'Lua',
     ),
   };
   static const Map<String, _PfdRuntimeConfig> _pfdExtensions = {
@@ -122,30 +68,6 @@ class _DownloadManagerState extends State<DownloadManager> {
       requiresExtraction: false,
       weight: 80.0,
       displayName: 'Ty',
-    ),
-    'rust-analyzer': _PfdRuntimeConfig(
-      moduleName: 'rust_analyzer_feature',
-      requiresExtraction: false,
-      weight: 80.0,
-      displayName: 'rust-analyzer',
-    ),
-    'zls': _PfdRuntimeConfig(
-      moduleName: 'zls_feature',
-      requiresExtraction: false,
-      weight: 80.0,
-      displayName: 'zls',
-    ),
-    'gopls': _PfdRuntimeConfig(
-      moduleName: 'gopls_feature',
-      requiresExtraction: false,
-      weight: 80.0,
-      displayName: 'gopls',
-    ),
-    'emmyluals': _PfdRuntimeConfig(
-      moduleName: 'emmylua_feature',
-      requiresExtraction: false,
-      weight: 80.0,
-      displayName: 'EmmyLuaLs',
     ),
     'bash-language-server': _PfdRuntimeConfig(
       moduleName: 'bash_language_server_feature',
@@ -158,12 +80,6 @@ class _DownloadManagerState extends State<DownloadManager> {
       assetArchiveName: 'copilot-language-server.zip',
       weight: 80.0,
       displayName: 'Github Copilot',
-    ),
-    'kmp-lsp': _PfdRuntimeConfig(
-      moduleName: 'kmp_lsp_feature',
-      requiresExtraction: false,
-      weight: 80.0,
-      displayName: 'Kmp LSP',
     ),
     'vscode-langservers-extracted': _PfdRuntimeConfig(
       moduleName: 'vscode_langservers_extracted_feature',
@@ -190,7 +106,6 @@ class _DownloadManagerState extends State<DownloadManager> {
     '_contextvars.cpython-313-aarch64-linux-android.so',
     '_csv.cpython-313-aarch64-linux-android.so',
     '_ctypes.cpython-313-aarch64-linux-android.so',
-    '_ctypes_test.cpython-313-aarch64-linux-android.so',
     '_datetime.cpython-313-aarch64-linux-android.so',
     '_decimal.cpython-313-aarch64-linux-android.so',
     '_elementtree.cpython-313-aarch64-linux-android.so',
@@ -225,21 +140,10 @@ class _DownloadManagerState extends State<DownloadManager> {
     '_struct.cpython-313-aarch64-linux-android.so',
     'syslog.cpython-313-aarch64-linux-android.so',
     'termios.cpython-313-aarch64-linux-android.so',
-    '_testbuffer.cpython-313-aarch64-linux-android.so',
-    '_testcapi.cpython-313-aarch64-linux-android.so',
-    '_testclinic.cpython-313-aarch64-linux-android.so',
-    '_testclinic_limited.cpython-313-aarch64-linux-android.so',
-    '_testexternalinspection.cpython-313-aarch64-linux-android.so',
-    '_testimportmultiple.cpython-313-aarch64-linux-android.so',
-    '_testinternalcapi.cpython-313-aarch64-linux-android.so',
-    '_testlimitedcapi.cpython-313-aarch64-linux-android.so',
-    '_testmultiphase.cpython-313-aarch64-linux-android.so',
-    '_testsinglephase.cpython-313-aarch64-linux-android.so',
     'unicodedata.cpython-313-aarch64-linux-android.so',
     'xxlimited_35.cpython-313-aarch64-linux-android.so',
     'xxlimited.cpython-313-aarch64-linux-android.so',
     'xxsubtype.cpython-313-aarch64-linux-android.so',
-    '_xxtestfuzz.cpython-313-aarch64-linux-android.so',
     'zlib.cpython-313-aarch64-linux-android.so',
     '_zoneinfo.cpython-313-aarch64-linux-android.so',
   ];
@@ -579,21 +483,6 @@ class _DownloadManagerState extends State<DownloadManager> {
       switch (normalizedParent) {
         case 'ty':
           await _createTyExecutableSymlink();  
-          break;
-        case 'rust-analyzer':
-          await _createRustAnalyzerExecutableSymlink();
-          break;
-        case 'gopls':
-          await _createGoplsExecutableSymlink();
-          break;
-        case 'emmyluals':
-          await _createEmmyLuaExecutableSymlink();
-          break;
-        case 'kmp-lsp':
-          await _createKmpLspExecutableSymlink();
-          break;
-        case 'zls':
-          await _createZLSExecutableSymlink();
           break;
         default:
           throw Exception(

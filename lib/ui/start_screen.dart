@@ -7,37 +7,6 @@ import 'package:roxum/bloc/ui_bloc/ui_bloc.dart';
 import 'package:roxum/utils/constants.dart';
 import '../ui/home.dart';
 import '../utils/functions.dart';
-
-const List<String> javaTools = [
-  'jar',
-  'jarsigner',
-  'java',
-  'javac',
-  'javadoc',
-  'javap',
-  'jcmd',
-  'jconsole',
-  'jdb',
-  'jdeprscan',
-  'jdeps',
-  'jfr',
-  'jhsdb',
-  'jinfo',
-  'jlink',
-  'jmap',
-  'jmod',
-  'jpackage',
-  'jps',
-  'jrunscript',
-  'jstack',
-  'jstat',
-  'jstatd',
-  'jwebserver',
-  'keytool',
-  'rmiregistry',
-  'serialver'
-];
-
 const List<String> goToolBinaries = [
   'asm',
   'cgo',
@@ -137,8 +106,7 @@ class _StartScreenState extends State<StartScreen> {
 
     final loaderTools = [
       'clang', 'clang++', 'clangloader', 'node', 'python', 'python3',
-      'npm', 'npx', 'pip', 'pip3', 'tsc', 'kotlinc', 'git', 'ruby',
-      'lua'
+      'npm', 'npx', 'pip', 'pip3', 'tsc', 'git',
     ];
 
     final symlinks = [
@@ -153,14 +121,12 @@ class _StartScreenState extends State<StartScreen> {
       {'src': '$sharedPath/libicudata.so', 'dst': '$libDir/libicudata.so.78'},
       {'src': '$sharedPath/libbash.so', 'dst': '$binDir/bash'},
       {'src': '$sharedPath/libbash.so', 'dst': '$binDir/sh'},
-      {'src': '$sharedPath/librstloader.so', 'dst': '$binDir/rustloader'},
       {'src': '$sharedPath/libgit-remote-https.so', 'dst': '$gitCore/git-remote-https'},
       {'src': '$sharedPath/libgit-remote-https.so', 'dst': '$gitCore/git-remote-http'},
       {'src': '$sharedPath/libccls.so', 'dst': '$binDir/ccls'},
       {'src': '$sharedPath/libless.so', 'dst': '$binDir/less', 'env': {'LD_LIBRARY_PATH' : libDir}},
       {'src': '$sharedPath/libless.so', 'dst': '$binDir/pager', 'env': {'LD_LIBRARY_PATH' : libDir}},
       ...loaderTools.map((tool) => loader(tool, env: {'ROXUM_SHARED_PATH': sharedPath})),
-      ...javaTools.map((tool) => loader(tool, env: {'ROXUM_SHARED_PATH': sharedPath})),
       {'src': '$binDir/clang', 'dst': '$binDir/aarch64-linux-android-clang'},
       {'src': '$binDir/clang++', 'dst': '$binDir/aarch64-linux-android-clang++'},
     ];
@@ -197,9 +163,6 @@ class _StartScreenState extends State<StartScreen> {
       });
     }
 
-    await _refreshRustGoRuntimeSymlinks(sharedPath);
-    await _refreshDartRuntimeSymlinks(sharedPath);
-    await _refreshZigRuntimeSymlinks(sharedPath);
 
     if (!File('$certDir/cacert.pem').existsSync()) {
       Directory(certDir).createSync(recursive: true);
