@@ -348,13 +348,15 @@ class _DownloadManagerState extends State<DownloadManager> {
         config: pfdConfig,
       );
       if (!pfdOk) {
-        if (mounted) {
-          setState(() {
-            loadingIndexes.remove(index);
-          });
-        }
+        // Play Feature Delivery is unavailable here — expected on sideloaded
+        // or fused builds, where the module payload ships inside this APK
+        // instead of arriving as a Play-delivered split. Keep going so the
+        // bundled assets below get a chance to install.
         downloadBloc.clearProgress(index);
-        return;
+        debugPrint(
+          'PFD install unavailable for ${pfdConfig.moduleName}; '
+          'falling back to bundled assets',
+        );
       }
 
       if (!pfdConfig.requiresExtraction) {
@@ -697,13 +699,12 @@ class _DownloadManagerState extends State<DownloadManager> {
           const Duration(minutes: 3),
           onTimeout: () => false,
         );
-        if (!ok && context.mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                'Failed to download ${config.displayName.toLowerCase()} feature module',
-              ),
-            ),
+        if (!ok) {
+          // Recoverable: the caller falls back to the assets bundled in this
+          // APK, so don't surface a download failure to the user here.
+          debugPrint(
+            'PFD install failed for ${config.moduleName}; '
+            'caller will attempt bundled-asset fallback',
           );
         }
         return ok;
