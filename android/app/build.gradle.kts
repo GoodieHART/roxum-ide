@@ -61,6 +61,7 @@ val stagePayloads = tasks.register<Copy>("stagePayloads") {
             into("jniLibs/arm64-v8a")
         }
     }
+    duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.EXCLUDE
     into(stagedPayloadsDir)
 }
 
@@ -130,6 +131,12 @@ android {
     )
 
     if (requestedPayloads.isNotEmpty()) {
+        // Staged payloads are visible to mergeReleaseNativeDebugMetadata both
+        // through the merged native libs and through the raw jniLibs source dir,
+        // which fails with "already contains entry arm64-v8a/libnode.so.sym".
+        // Sideload APKs ship no .sym files, so skip native debug metadata here.
+        defaultConfig.ndk.debugSymbolLevel = "NONE"
+
         // AGP 9 rejects Provider<Directory> in sourceSets, so resolve to File.
         // The stagePayloads dependency is wired explicitly below.
         val stagedRoot = stagedPayloadsDir.get().asFile
