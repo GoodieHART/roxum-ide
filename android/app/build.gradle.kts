@@ -130,9 +130,12 @@ android {
     )
 
     if (requestedPayloads.isNotEmpty()) {
+        // AGP 9 rejects Provider<Directory> in sourceSets, so resolve to File.
+        // The stagePayloads dependency is wired explicitly below.
+        val stagedRoot = stagedPayloadsDir.get().asFile
         sourceSets.getByName("main") {
-            assets.srcDir(stagedPayloadsDir.map { it.dir("assets") })
-            jniLibs.srcDir(stagedPayloadsDir.map { it.dir("jniLibs") })
+            assets.srcDir(stagedRoot.resolve("assets"))
+            jniLibs.srcDir(stagedRoot.resolve("jniLibs"))
         }
     }
 }
