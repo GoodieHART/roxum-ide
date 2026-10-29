@@ -12,6 +12,58 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 }
 
+// ---------------------------------------------------------------------------
+// Payload bundling for sideload / offline builds
+//
+// Runtime and extension payloads live in dynamic-feature modules, which a plain
+// `flutter build apk` does not package (only `bundleRelease` sees them). Selecting
+// payloads copies their assets/ and jniLibs/ into the base module so a single
+// self-contained APK ships them, with no AAB + bundletool round-trip.
+//
+//   ORG_GRADLE_PROJECT_payloads=all flutter build apk --release
+//   ./gradlew :app:assembleRelease -Ppayloads=python,node
+//
+// Unset => nothing is staged, so the Play / AAB path stays lean.
+// ---------------------------------------------------------------------------
+val payloadsCatalog = Properties().apply {
+    val catalogFile = rootProject.file("payloads.properties")
+    if (catalogFile.exists()) catalogFile.inputStream().use { load(it) }
+}
+
+val requestedPayloads: List<String> =
+    (project.findProperty("payloads") as String? ?: "")
+        .split(",")
+        .map { it.trim() }
+        .filter { it.isNotEmpty() }
+        .let { selection ->
+            if (selection.contains("all")) payloadsCatalog.stringPropertyNames().sorted() else selection
+        }
+
+val unknownPayloads = requestedPayloads.filterNot { payloadsCatalog.containsKey(it) }
+require(unknownPayloads.isEmpty()) {
+    "Unknown payload module(s): ${unknownPayloads.joinToString()}. " +
+        "Valid keys: ${payloadsCatalog.stringPropertyNames().sorted().joinToString()}"
+}
+
+val stagedPayloadsDir = layout.buildDirectory.dir("staged-payloads")
+
+val stagePayloads = tasks.register<Copy>("stagePayloads") {
+    group = "build"
+    description = "Stage selected dynamic-feature payloads into the base module."
+    requestedPayloads.forEach { key ->
+        val featureMain = file("src/${payloadsCatalog.getProperty(key)}/src/main")
+        from(featureMain.resolve("assets")) {
+            include("*.zip")
+            into("assets")
+        }
+        from(featureMain.resolve("jniLibs/arm64-v8a")) {
+            include("*.so")
+            into("jniLibs/arm64-v8a")
+        }
+    }
+    into(stagedPayloadsDir)
+}
+
 android {
     namespace = "com.roxum"
     compileSdk = 36
@@ -76,6 +128,21 @@ android {
             ":app:vscode_langservers_extracted_feature",
         )
     )
+
+    if (requestedPayloads.isNotEmpty()) {
+        sourceSets.getByName("main") {
+            assets.srcDir(stagedPayloadsDir.map { it.dir("assets") })
+            jniLibs.srcDir(stagedPayloadsDir.map { it.dir("jniLibs") })
+        }
+    }
+}
+
+if (requestedPayloads.isNotEmpty()) {
+    tasks.matching { it.name == "preBuild" }.configureEach { dependsOn(stagePayloads) }
+    tasks.matching {
+        it.name.startsWith("merge") &&
+            (it.name.endsWith("Assets") || it.name.endsWith("JniLibFolders"))
+    }.configureEach { dependsOn(stagePayloads) }
 }
 
 kotlin {
