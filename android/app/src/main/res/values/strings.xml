@@ -2,6 +2,7 @@
 <resources>
     <string name="node_feature_title">Node Feature</string>
     <string name="python_feature_title">Python Feature</string>
+    <string name="java_feature_title">Java Feature</string>
     <string name="clang_feature_title">Clang Feature</string>
     <string name="ty_feature_title">Ty Feature</string>
     <string name="bash_language_server_feature_title">Bash Language Server Feature</string>
