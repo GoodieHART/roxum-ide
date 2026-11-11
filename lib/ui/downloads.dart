@@ -771,6 +771,12 @@ class _DownloadManagerState extends State<DownloadManager> {
       if (normalizedRuntimeName == 'java' ||
           normalizedRuntimeName == 'java-21-openjdk' ||
           archiveName == 'java-21-openjdk.zip') {
+        // Normalize extracted dir name (termux zip ships openjdk-21.0.1)
+        final altDir = Directory('$runtimesDir/openjdk-21.0.1');
+        final javaDir = Directory('$runtimesDir/java-21-openjdk');
+        if (await altDir.exists() && !await javaDir.exists()) {
+          await altDir.rename(javaDir.path);
+        }
         await _copyJavaRuntimeLibraries();
       }
 
