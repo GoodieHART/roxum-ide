@@ -124,6 +124,7 @@ android {
             ":app:python_feature",
             ":app:clang_feature",
             ":app:ty_feature",
+            ":app:java_feature",
             ":app:bash_language_server_feature",
             ":app:copilot_language_server_feature",
             ":app:vscode_langservers_extracted_feature",

@@ -61,6 +61,12 @@ class _DownloadManagerState extends State<DownloadManager> {
       weight: 80.0,
       displayName: 'Clang',
     ),
+    'java': _PfdRuntimeConfig(
+      moduleName: 'java_feature',
+      assetArchiveName: 'java-21-openjdk.zip',
+      weight: 120.0,
+      displayName: 'Java 21',
+    ),
   };
   static const Map<String, _PfdRuntimeConfig> _pfdExtensions = {
     'ty': _PfdRuntimeConfig(
