@@ -777,6 +777,10 @@ class _DownloadManagerState extends State<DownloadManager> {
         if (await altDir.exists() && !await javaDir.exists()) {
           await altDir.rename(javaDir.path);
         }
+        // Ensure executables are runnable (zip extraction may drop exec bits).
+        if (await javaDir.exists()) {
+          await Process.run('chmod', ['-R', '+x', '${javaDir.path}/bin']);
+        }
         await _copyJavaRuntimeLibraries();
       }
 
