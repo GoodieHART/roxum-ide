@@ -961,7 +961,7 @@ class AgenticTools {
       'HOME': homeDir,
       'PWD': workingDirectory,
       'PS1': r' \[\e[32m\]\w \[\e[0m\]\$ ',
-      'PATH': '$binDir:$runtimesDir/node/bin:/bin:/usr/bin:/sbin:/usr/sbin',
+      'PATH': '$binDir:$runtimesDir/java-21-openjdk/bin:$runtimesDir/node/bin:/bin:/usr/bin:/sbin:/usr/sbin',
       'PROMPT_DIRTRIM': '2',
       'ROXUM_SHARED_PATH': sharedPath,
       'LD_LIBRARY_PATH': '$sharedPath:$libDir:$runtimesDir/clang',

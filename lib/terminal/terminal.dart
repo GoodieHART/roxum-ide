@@ -639,7 +639,7 @@ class _SetupTerminalState extends State<SetupTerminal> {
     final enVars = <String, String>{
       'HOME': homeDir,
       'PS1': ' \x1b[32m\\w \x1b[0m\$ ',
-      'PATH': '$binDir:$runtimesDir/node/bin:/bin:/usr/bin:/sbin:/usr/sbin',
+      'PATH': '$binDir:$runtimesDir/java-21-openjdk/bin:$runtimesDir/node/bin:/bin:/usr/bin:/sbin:/usr/sbin',
       'PROMPT_DIRTRIM': '2',
       'ROXUM_SHARED_PATH': _sharedPath,
       'LD_LIBRARY_PATH': '$_sharedPath:$libDir:$runtimesDir/clang',
