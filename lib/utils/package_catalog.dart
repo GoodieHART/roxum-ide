@@ -28,6 +28,16 @@ class PackageCatalogSyncResult {
 class PackageCatalogService {
   static final List<RunTime> _pfdRuntimes = [
     RunTime(
+      name: 'Java 21',
+      version: '21.0.1',
+      details: 'The Java 21 (OpenJDK) runtime.\nRequired for Java compilation and LSP support.',
+      url: 'https://github.com/heckmon/android-arm64-shared-libraries/releases/download/v0.0.1/java-21-openjdk.zip',
+      archiveName: 'java-21-openjdk.zip',
+      archiveSize: 189,
+      parentName: 'java',
+      iconUrl: 'assets/material_icons/java.svg',
+    ),
+    RunTime(
       name: 'Python',
       version: '3.13.5',
       details: 'The python interpreter.\nDownload the ty extension for LSP support.',
